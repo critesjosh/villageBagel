@@ -1,13 +1,149 @@
+var cart = [];
+var count = 0;
+
 $(document).ready(
 
 )
 
-function contactSubmit() {
+function addBagelsToCart () {
   event.preventDefault()
-  name = $('#contact-name').val()
-  email = $('#contact-email').val()
-  subject = $('#contact-subject').val()
-  message = $('#contact-message').val()
+  var bagel = $('#bagel-type').val()
+  var number = $('#bagel-number').val()
+  bagel = bagel.replace('_', ' ')
+  if(number > 1) {
+    cart.push({item: 'Bagels', number: number, type:bagel, id: count, size: ''})
+  } else if (number = 1){
+    cart.push({item: 'Bagel', number: number, type:bagel, id: count, size: ''})
+  }
+  count++
+  updateCart()
 
-  console.log(name, email, subject, message)
+  console.log(cart)
+}
+
+function addShmearsToCart () {
+  event.preventDefault()
+  var shmear = $('#shmear-type').val()
+  var number = $('#shmear-number').val()
+  size = $('#shmear-size').val()
+
+  size = size.replace(/_/, ' ')
+  shmear = shmear.replace(/_/g, ' ')
+
+  if (number > 1) {
+    cart.push({type: shmear, number: number, item: 'Shmears', size: size, id: count})
+  } else if (number = 1){
+    cart.push({type: shmear, number: number, item: 'Shmear', size: size, id: count})
+  }
+  count++
+  updateCart()
+}
+
+function addSpreadsToCart () {
+  event.preventDefault()
+  var spread = $('#spread-type').val()
+  var number = $('#spread-number').val()
+  var size = $('#spread-size').val()
+
+  if (spread === 'almond_butter') {
+    spread = 'Almond Butter'
+  }
+  size = size.replace(/_/, " ")
+
+  if (number > 1) {
+    cart.push({type: spread, number: number, item:'Spreads', size: size, id: count})
+  } else if (number = 1) {
+    cart.push({type: spread, number: number, item:'Spread', size: size, id: count})
+  }
+  count++
+  updateCart()
+
+}
+
+function updateCart () {
+  var subtotal = 0
+  var bagels = 0
+  var shmearsHalf = 0
+  var shmearsWhole = 0
+  var spreadsSingle = 0
+  var spreadsHalf = 0
+
+  $('#cart').empty()
+  cart.forEach(function(element, index, array){
+    $('#cart').append(`<div class="cart-item">
+      ${element.number} ${element.item}: ${element.type} ${element.size}
+      <span style="float:right;" class="glyphicon glyphicon-remove" aria-hidden="true" onclick="deleteFromCart(${element.id})"></span>
+      <hr/>
+    </div>`)
+  })
+
+  cart.forEach(function(element, index){
+    if(element.item === 'Bagel' || element.item === 'Bagels'){
+      bagels = bagels + Number(element.number)
+    }
+    if(element.item === 'Shmear' || element.item === 'Shmears'){
+      if(element.size === 'Half Pound') {
+        shmearsHalf = shmearsHalf +  Number(element.number)
+      }
+      if(element.size === 'One Pound') {
+        shmearsWhole = shmearsWhole +  Number(element.number)
+      }
+    }
+    if(element.item === 'Spread' || element.item === 'Spreads'){
+      if(element.size === 'Single') {
+        spreadsSingle = spreadsSingle +  Number(element.number)
+      }
+      if(element.size === 'Half Pound') {
+        spreadsHalf = spreadsHalf +  Number(element.number)
+      }
+    }
+  })
+
+  bagels = workBagels(bagels)
+  subtotal = workSubtotal(subtotal, bagels)
+
+  subtotal = subtotal + bagels * 2.5
+  subtotal = subtotal + shmearsHalf * 5
+  subtotal = subtotal + shmearsWhole * 9
+  subtotal = subtotal + spreadsSingle * 2
+  subtotal = subtotal + spreadsHalf * 6
+
+  $('#subtotal').html(`$${subtotal}`)
+}
+
+function deleteFromCart(id) {
+  cart.forEach(function(element, index){
+    if (element.id === id){
+      cart.splice(index, 1)
+    }
+  })
+  updateCart()
+}
+
+function checkout () {
+
+}
+
+function workBagels(bagels) {
+  if (bagels >= 13) {
+    bagels = bagels - 13
+  } else if (bagels >= 6){
+    bagels = bagels - 6
+  } else {
+    return bagels
+  }
+  workBagels(bagels)
+}
+
+function workSubtotal(subtotal, bagels) {
+  if (bagels >= 13) {
+    subtotal = subtotal + 23
+    bagels = bagels - 13
+  } else if (bagels >= 6){
+    subtotal = subtotal + 12
+    bagels = bagels - 6
+  } else {
+    return subtotal
+  }
+  workBagels(subtotal, bagels)
 }

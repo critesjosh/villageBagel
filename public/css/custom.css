@@ -2,7 +2,20 @@ ul{
   list-style-type: none;
 }
 
-#message-body {
-  height: 300px;
-  width: inherit;
+.cart {
+  margin-top: 80px;
+  border: 2px solid grey;
+  border-radius: 5px;
+}
+
+.cart-item {
+  font-size: 16px;
+}
+
+.cart-title {
+  margin-top: 10px;
+}
+
+.checkout {
+  float:right;
 }

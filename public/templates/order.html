@@ -30,16 +30,16 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Village Bagel</a>
+                <a class="navbar-brand" href="/">Village Bagel</a>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                  <li class="active"><a href="/">Home</a></li>
                   <li><a href="/our_company">Our Company</a></li>
-                  <li><a href="/contact">Contact</a></li>
-                  <li><a href="/sample_menu">Sample Menu</a></li>
                   <li><a href="/backdoor_bagels">Backdoor Bagels</a></li>
-                  <li><a href="/order">Place your order</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/order">Order</a></li>
+                  <li><a href="/contact">Contact</a></li>
                 </ul>
               </div>
             </div>
@@ -60,13 +60,125 @@
         <hr class="featurette-divider">
 
         <div class="row featurette">
-          <div class="col-md-7">
+          <div class="col-md-6">
             <h2 class="featurette-heading">Place an order </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <span class="lead text-muted">Bagels</span>
+            <p>
+              $2.50 each | $12 half-dozen | $23 baker's dozen
+            </p>
+            <form>
+              <!-- Bagels --->
+              <div class="form-group">
+                <label for="bagel-type">Bagels: </label>
+                <select name="bagel-type" id="bagel-type">
+                  <option value="Plain">Plain</option>
+                  <option value="Salt">Salt</option>
+                  <option value="Poppy">Poppy</option>
+                  <option value="Sesame">Sesame</option>
+                  <option value="Onion">Onion</option>
+                  <option value="Everything">Everything</option>
+                  <option value="Garlic">Garlic</option>
+                  <option value="Cinnamon_Raisin">Cinnamon Raisin</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="bagel-number">
+                  How many?
+                </label>
+                <input type="number" name="bagel-number" id="bagel-number" min="1"/>
+              </div>
+              <button class="btn btn-default" onclick="addBagelsToCart()" type="submit">Add to cart</button>
+            </form>
+
+            <hr />
+
+
+              <!-- Shmears -->
+              <form>
+                <span class="lead text-muted">Shmears</span>
+                <p>
+                  $5 half pound | $9 pound
+                </p>
+                <div class="form-group">
+                  <label for="shmear-type">Shmears: </label>
+                  <select name="smear-type" id="shmear-type">
+                    <option value="Whipped_Plain">Whipped Plain</option>
+                    <option value="Hatch_Green_Chili">Hatch Green Chili</option>
+                    <option value="Honey_Rosemerry">Honey Rosemerry</option>
+                    <option value="Bacon">Bacon</option>
+                    <option value="Veggie">Veggie</option>
+                    <option value="Chive_&amp;_Onion">Chive &amp; Onion</option>
+                    <option value="Nutella_Swirl">Nutella Swirl</option>
+                    <option value="Maple_Walnut">Maple Walnut</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="shmear-size">Size: </label>
+                  <select name="shmear-number" id="shmear-size">
+                    <option value="Half_Pound">Half Pound</option>
+                    <option value="One_Pound">One Pound</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="shmear-number">
+                    How many?
+                  </label>
+                  <input id="shmear-number" name="shmear-number" type="number" min="1" />
+                </div>
+                <button class="btn btn-default" onclick="addShmearsToCart()" type="submit">Add to cart</button>
+
+              </form>
+              <hr />
+
+
+              <!--Spreads -->
+              <form>
+                <span class="lead text-muted">Spreads</span>
+                <p>
+                  $2 single serving | $6 half pound
+                </p>
+                <div class="form-group">
+                  <label for="spread-type">Spreads: </label>
+                  <select name="spread-number" id="spread-type">
+                    <option value="Avocado">Avocado</option>
+                    <option value="almond_butter">Almond Butter</option>
+                    <option value="Strawberry">Strawberry</option>
+                    <option value="Hummus">Hummus</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="spread-size">Size: </label>
+                  <select name="spread-number" id="spread-size">
+                    <option value="Single">Single</option>
+                    <option value="Half_Pound">Half Pound</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="spread-number">
+                    How many?
+                  </label>
+                  <input id="spread-number" name="spread-number" type="number" min="1"/>
+                </div>
+                <button class="btn btn-default" onclick="addSpreadsToCart()" type="submit">Add to cart</button>
+
+              </form>
+
           </div>
-          <div class="col-md-5">
-            <img src="images/logo.jpg"class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <div class="col-md-6 cart">
+            <br />
+            <span class="lead text-muted cart-title">Cart</span>
+            <hr />
+            <div id="cart">
+            </div>
+            <p>
+              Subtotal: <span id="subtotal"></span>
+            </p>
+            <hr />
+            <button class="btn btn-default checkout" onclick="checkout()">Place your order</button>
+            <br />
+            <br />
           </div>
+
         </div>
 
         <hr class="featurette-divider">
