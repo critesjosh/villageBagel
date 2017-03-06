@@ -1,0 +1,19 @@
+{
+  "name": "village-bagel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.0"
+  },
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+}
