@@ -1,0 +1,27 @@
+{
+  "name": "village-bagel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "debug": "*",
+    "express": "*",
+    "jade": "*",
+    "morgan": "*",
+    "serve-favicon": "*",
+    "unirest": "latest",
+    "pug": "*"
+  },
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+}
